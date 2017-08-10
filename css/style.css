@@ -1,0 +1,54 @@
+/*
+
+*{
+  border: 1px solid red !important;
+  margin: 0px;
+}
+
+*/
+
+.container{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.box{
+	width: 100%;
+}
+
+#nav{
+	background-color: #84d6fc;
+	height: 200px;
+	order:2;
+
+}
+
+#map{
+	background-color: green;
+	height: 450px;
+}
+
+
+@media screen and (min-width:750px){
+	.container{
+		width: 80%;
+		display: flex;
+		margin-top: 50px;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+	#nav{
+		width: 30%;
+		height: 700px;
+		order: 1;
+	
+	}
+	#map{
+		width: 70%;
+		height: 700px;
+		order:2 ;
+	}
+
+}
