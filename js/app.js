@@ -47,10 +47,12 @@ var Location = function(data){
 };
 
 
-
-
 var ViewModel = function(){
+  var self = this;
+  //creating an array list to house location data 
+  this.allLocations = ko.observableArray([]);
 
+  // need to append  all location data into the observble Array
 
 
 };
