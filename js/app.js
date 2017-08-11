@@ -6,7 +6,7 @@ var map;
 //Map 
 var mapTitle = ko.observable("Indianapolis");
 var mapCordinates = {lat:39.797500, lng:-86.166390};
-var mapZoom = 12;
+var mapZoom = 13;
 
 /*
 var Location = function(){
@@ -74,6 +74,10 @@ function initMap() {
 		zoom: mapZoom
 	});
 
+	//Creates a new bounds based on a southwest and a northeast corner.
+	//need to figure out how to use it 
+	var bounds = new google.maps.LatLngBounds();
+
 	//creates a marker for each location
   for(var i=0; i < locations.length; i++){
     var cordinates = locations[i].gCordinates;
@@ -89,7 +93,6 @@ function initMap() {
 
 		// To add the marker to the map, call setMap();
     marker.setMap(map);
-
     //removes marker from map
     //marker.setMap(null);
 
