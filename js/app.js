@@ -48,6 +48,12 @@ var Location = function(data){
 		title: self.title()
 	});
 
+	google.maps.event.addListener(self.marker, 'click', function(){
+		//This will run functions with the marler is clicked
+});
+
+	//will need map variable for marker.setMap 
+
 };
 
 
