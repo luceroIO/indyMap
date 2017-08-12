@@ -9,9 +9,12 @@
   <body>
   	<main class="container">
       <section class = "box" id="nav">
-				<ul data-bind="foreach: allLocations">
-					<li data-bind="text: "></li>
-				</ul>
+      	<div class = "navItem">
+      		<h1>Indianapolis, IN</h1>
+      	</div>
+      	<div class = "navItem">
+					<input data-bind="textInput: searchInput" placeholder="Type to filter list...">
+      	</div>
 
   
       </section>

@@ -61,7 +61,6 @@ var Location = function(data, map){
 	markerOnMap = true;
 	//need to have the search input determine to the value
 
-
 	this.markerGod = ko.computed(function(){
 		if (self.markerOnMap === true ){
 			self.marker.setMap(map);
