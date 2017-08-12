@@ -1,11 +1,9 @@
 'use strict';
 
-// map variable is need for google maps initMap function
-var map;
-
 //Map 
 var mapTitle = "Indianapolis";
 var mapCordinates = {lat:39.797500, lng:-86.166390};
+//not a fan of 13 but its a solid choice
 var mapZoom = 13;
 
 //Markers
@@ -59,11 +57,12 @@ var ViewModel = function(){
   this.map= initMaP()
   //creating an array list to house location data 
   this.allLocations = ko.observableArray([]);
-  this.navHeader = ko.observable();
-
-  // need to append  all location data into the observble Array
-
+  // appends  all location data into the observble Array
+  locations.forEach(function(data){
+  	self.allLocations.push(new Location(data))
+	});
 };
+
 
 function initMap() {
 	//I dont have to define map here I can simple use 
@@ -77,7 +76,6 @@ function initMap() {
 		zoom: mapZoom
 	});
 };
-
 
 //
 function indyMap(){
