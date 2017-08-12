@@ -37,7 +37,7 @@ var locations =[
 ];
 
 //creating observable location data
-var Location = function(data){
+var Location = function(data, map){
 	var self = this
   this.title = ko.observable(data.title);
   this.category = ko.observable(data.category);
@@ -65,7 +65,8 @@ var ViewModel = function(){
   this.allLocations = ko.observableArray([]);
   // appends  all location data into the observble Array
   locations.forEach(function(data){
-  	self.allLocations.push(new Location(data))
+  	var addLocation = new Location(data, self.map);
+  	self.allLocations.push(addLocation);
 	});
 };
 
