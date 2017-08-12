@@ -58,11 +58,21 @@ var Location = function(data, map){
 	//maker . Now  a condictional can be used  on a boolean to control 
 	// removing or adding the marker
 	
-	markerOnMap = true;
-	//need to have the search input determine to the value
+	this.markerOnMap = ko.computed(function() {
+		//need to have the search input determine to the value
+		//The indexOf() method returns the first index at which
+		// a given element can be found in the array, or -1 if it is not present.
+  	if (searchInput().length > 0){
+  	// returns a value of false if  location title is not in the searchInput
+  		return(self.title().toLowerCase().indexOf(searchInput().toLowerCase()) > -1);
+  	} else{
+  		return true
+  	}
+  });
+
 
 	this.markerGod = ko.computed(function(){
-		if (self.markerOnMap === true ){
+		if (self.markerOnMap()) {
 			self.marker.setMap(map);
 		} else{
 			self.marker.setMap(null);
