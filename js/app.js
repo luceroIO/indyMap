@@ -40,8 +40,16 @@ var locations =[
 
 //creating observable location data
 var Location = function(data){
+	var self = this
   this.title = ko.observable(data.title);
   this.category = ko.observable(data.category);
+  this.gCordinates = ko.observable(data.gCordinates);
+	
+	this.marker = new google.maps.Marker({
+		cordinates: self.gCordinates(),
+		title: self.title()
+	});
+
 };
 
 
@@ -54,7 +62,6 @@ var ViewModel = function(){
   this.navHeader = ko.observable();
 
   // need to append  all location data into the observble Array
-
 
 };
 
