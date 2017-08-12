@@ -3,7 +3,7 @@
 //Map 
 var mapTitle = "Indianapolis";
 var mapCordinates = {lat:39.797500, lng:-86.166390};
-//not a fan of 13 but its a solid choice
+//not a fan of 13 but its a solid choice here
 var mapZoom = 13;
 
 //Markers
@@ -37,6 +37,7 @@ var locations =[
 ];
 
 //creating observable location data
+// will need location  and map data for marker.setMap()
 var Location = function(data, map){
 	var self = this
   this.title = ko.observable(data.title);
@@ -49,10 +50,27 @@ var Location = function(data, map){
 	});
 
 	google.maps.event.addListener(self.marker, 'click', function(){
-		//This will run functions with the marler is clicked
-});
+		//This will run functions when the marker is clicked
+	});
 
-	//will need map variable for marker.setMap 
+	//will need map variable for marker.setMap(map)
+	//this adds the marker .  marker.setMap(null) removes the
+	//maker . Now  a condictional can be used  on a boolean to control 
+	// removing or adding the marker
+	
+	markerOnMap = true;
+	//need to have the search input determine to the value
+
+
+	this.markerGod = ko.computed(function(){
+		if (self.markerOnMap === true ){
+			self.marker.setMap(map);
+		} else{
+			self.marker.setMap(null);
+		}
+
+	});
+
 
 };
 
