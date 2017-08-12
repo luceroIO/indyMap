@@ -84,7 +84,7 @@ var Location = function(data, map){
 };
 
 
-var ViewModel = function(){
+ViewModel = function(){
   var self = this;
   //capturing the value that InitMap returns
   this.map= initMaP()
@@ -95,7 +95,18 @@ var ViewModel = function(){
   	var addLocation = new Location(data, self.map);
   	self.allLocations.push(addLocation);
 	});
-};
+
+	//Need to have my locations that are in the search Input stored
+	this.searchLocations = ko.computer(function(){
+		var inSearch = [];
+		self.allLocations().forEach(function(location){
+			if(location.markerOnMap()) {
+				inSearch.push(location);
+			}
+		});
+		return inSearch;
+	});
+}
 
 
 function initMap() {
