@@ -49,14 +49,23 @@ var Location = function(data, map){
 	
 	this.marker = new google.maps.Marker({
 		cordinates: self.gCordinates(),
+		//I looked up and read the document on Google Marker Animations
+		animation: google.maps.Animation.Drop,
 		title: self.title()
 	});
 
-//
-//	google.maps.event.addListener(self.marker, 'click', function(){
-		//This will run functions when the marker is clicked
-//	});
-//
+	google.maps.event.addListener(self.marker, 'click', function(){
+		self.toggleBounce();
+	});
+
+	this.toggleBounce = function() {
+		if (self.marker.getAnimation() !== null) {
+		  self.marker.setAnimation(null);
+		} else {
+		  marker.setAnimation(google.maps.Animation.BOUNCE);
+		}
+	};
+	//
 	//will need map variable for marker.setMap(map)
 	//this adds the marker .  marker.setMap(null) removes the
 	//maker . Now  a condictional can be used  on a boolean to control 
@@ -104,9 +113,9 @@ var ViewModel = function(){
 	//Need to have my locations that are in the search Input stored
 	this.searchLocations = ko.computed(function(){
 		var inSearch = [];
-		self.allLocations().forEach(function(data){
-			if(data.markerOnMap()) {
-				inSearch.push(data);
+		self.allLocations().forEach(function(lData){
+			if(lData.markerOnMap()) {
+				inSearch.push(lData);
 			}
 		});
 		return inSearch;
@@ -131,6 +140,3 @@ function initMap() {
 function indyMap(){
 ko.applyBindings(new ViewModel());
 }
-
-
-
