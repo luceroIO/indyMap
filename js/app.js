@@ -1,7 +1,7 @@
 'use strict';
 
 //Map 
-var mapTitle = "Indianapolis";
+var mapTitle = "Indianapolis, IN";
 var mapCordinates = {lat:39.797500, lng:-86.166390};
 //not a fan of 13 but its a solid choice here
 var mapZoom = 13;
@@ -90,6 +90,7 @@ var Location = function(data, map){
 
 var ViewModel = function(){
   var self = this;
+  this.mapTitle = ko.observable(mapTitle);
   //capturing the value that InitMap returns
   this.map= initMap();
   //creating an array list to house location data 
