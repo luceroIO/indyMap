@@ -13,22 +13,31 @@
       		<h1>Indianapolis, IN</h1>
       	</div>
       	<div class = "navItem">
-					<input data-bind="textInput: searchInput" placeholder="Type to filter list...">
+					<input type="text" data-bind="textInput: searchInput"
+					placeholder="Type to filter ....">
       	</div>
-
+      	<div class = "navItem">
+					<ul data-bind="foreach: searchLocations">
+						<li data-bind="text: title"></li>
+					</ul>
+      	</div>
   
       </section>
-      <section class = "box" id ="map">
+      <section class ="box" id ="map">
 
       </section>
 
   	</main>
+  	<!-- by defaullt this goople api link calls initMap, be i call this function in
+  	my VeiwModel,  i created a function called indyMap which applys my bindings and
+  	in a sense is a trigger for the whole thing , so im using this url  call IndyMap
+  	-->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACbqxjNBRE54xH4kDaOwrsHf-wfPUrxk4&v=3&callback=indyMap">
+    </script>
   	<script src="js/lib/knockout.js"></script>
   	<script src="js/lib/jquery.js"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACbqxjNBRE54xH4kDaOwrsHf-wfPUrxk4&v=3&callback=initMap">
-    </script>
-    <script src="js/app.js"></script>
+    <script defer="defer" src="js/app.js"></script>
 
   </body>
 </html>

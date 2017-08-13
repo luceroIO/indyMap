@@ -6,6 +6,9 @@ var mapCordinates = {lat:39.797500, lng:-86.166390};
 //not a fan of 13 but its a solid choice here
 var mapZoom = 13;
 
+//User's search input 
+var searchInput = ko.observable('');
+
 //Markers
 var locations =[
 	{
@@ -39,7 +42,7 @@ var locations =[
 //creating observable location data
 // will need location  and map data for marker.setMap()
 var Location = function(data, map){
-	var self = this
+	var self = this;
   this.title = ko.observable(data.title);
   this.category = ko.observable(data.category);
   this.gCordinates = ko.observable(data.gCordinates);
@@ -49,16 +52,17 @@ var Location = function(data, map){
 		title: self.title()
 	});
 
-	google.maps.event.addListener(self.marker, 'click', function(){
+//
+//	google.maps.event.addListener(self.marker, 'click', function(){
 		//This will run functions when the marker is clicked
-	});
-
+//	});
+//
 	//will need map variable for marker.setMap(map)
 	//this adds the marker .  marker.setMap(null) removes the
 	//maker . Now  a condictional can be used  on a boolean to control 
 	// removing or adding the marker
 	
-	this.markerOnMap = ko.computed(function() {
+	this.markerOnMap = ko.computed(function(){
 		//need to have the search input determine to the value
 		//The indexOf() method returns the first index at which
 		// a given element can be found in the array, or -1 if it is not present.
@@ -66,7 +70,7 @@ var Location = function(data, map){
   	// returns a value of false if  location title is not in the searchInput
   		return(self.title().toLowerCase().indexOf(searchInput().toLowerCase()) > -1);
   	} else{
-  		return true
+  		return true;
   	}
   });
 
@@ -84,10 +88,10 @@ var Location = function(data, map){
 };
 
 
-ViewModel = function(){
+var ViewModel = function(){
   var self = this;
   //capturing the value that InitMap returns
-  this.map= initMaP()
+  this.map= initMap();
   //creating an array list to house location data 
   this.allLocations = ko.observableArray([]);
   // appends  all location data into the observble Array
@@ -97,11 +101,11 @@ ViewModel = function(){
 	});
 
 	//Need to have my locations that are in the search Input stored
-	this.searchLocations = ko.computer(function(){
+	this.searchLocations = ko.computed(function(){
 		var inSearch = [];
-		self.allLocations().forEach(function(location){
-			if(location.markerOnMap()) {
-				inSearch.push(location);
+		self.allLocations().forEach(function(data){
+			if(data.markerOnMap()) {
+				inSearch.push(data);
 			}
 		});
 		return inSearch;
@@ -124,8 +128,8 @@ function initMap() {
 
 //
 function indyMap(){
-	//need a place to apply my bindings
-  ko.applyBindings(new ViewModel());
+ko.applyBindings(new ViewModel());
 }
+
 
 
