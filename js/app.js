@@ -5,7 +5,7 @@ var mapTitle = "Indianapolis, IN";
 var mapCordinates = {lat:39.797500, lng:-86.166390};
 //not a fan of 13 but its a solid choice here
 var mapZoom = 13;
-
+var infoWindow;
 //User's search input 
 var searchInput = ko.observable('');
 
@@ -50,21 +50,33 @@ var Location = function(data, map){
 	this.marker = new google.maps.Marker({
 		position: self.gCordinates(),
 		//I looked up and read the document on Google Marker Animations
-		animation: google.maps.Animation.Drop,
+		animation: google.maps.Animation.DROP,
 		title: self.title()
 	});
+
 
 	google.maps.event.addListener(self.marker, 'click', function(){
 		self.toggleBounce();
 	});
 
+	this.infoMagic = function(){
+		infoWindow.open(map, self.marker);
+	};
+
 	this.toggleBounce = function() {
 		if (self.marker.getAnimation() !== null) {
 		  self.marker.setAnimation(null);
 		} else {
-		  marker.setAnimation(google.maps.Animation.BOUNCE);
-		}
+		  self.marker.setAnimation(google.maps.Animation.BOUNCE);
+		  //Using window setTimeout() method to call or
+		  //evaluate an expression after a specified milliseconds
+		  setTimeout(function(){
+		  	self.marker.setAnimation(null);
+		  }, 2300);
+		 }
 	};
+
+
 	//
 	//will need map variable for marker.setMap(map)
 	//this adds the marker .  marker.setMap(null) removes the
@@ -120,7 +132,13 @@ var ViewModel = function(){
 		});
 		return inSearch;
 	});
+
+	this.listClicker = function(ldata, click){
+		ldata.toggleBounce();
+	}
+
 }
+
 
 
 function initMap() {

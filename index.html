@@ -18,7 +18,13 @@
       	</div>
       	<div class = "navItem">
 					<ul data-bind="foreach: searchLocations">
-						<li data-bind="text: title"></li>
+						<!--@http://knockoutjs.com/documentation/click-binding.html
+						It tells you "If you’re inside a nested binding context, for example if you’re
+						 inside a foreach or a with block, but your handler function is on
+						 the root viewmodel or some other parent context, you’ll need to use
+						 a prefix such as $parent or $root to locate the handler function"
+						 -->
+						<li data-bind="text: title, click: $parent.listClicker"></li>
 					</ul>
       	</div>
   
