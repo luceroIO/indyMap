@@ -48,7 +48,7 @@ var Location = function(data, map){
   this.gCordinates = ko.observable(data.gCordinates);
 	
 	this.marker = new google.maps.Marker({
-		cordinates: self.gCordinates(),
+		position: self.gCordinates(),
 		//I looked up and read the document on Google Marker Animations
 		animation: google.maps.Animation.Drop,
 		title: self.title()
