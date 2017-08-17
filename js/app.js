@@ -1,9 +1,17 @@
 'use strict';
 
 //Map 
-var mapTitle = "Indianapolis, IN";
+var mapTitle = 'Indianapolis, IN';
 var mapCordinates = {lat:39.797500, lng:-86.166390};
-//not a fan of 13 but its a solid choice here
+
+//Using FOURSQUARE for the API req
+var fourSqHelper = 'https://api.foursquare.com/v2/venues/search?ll=';
+var clientID ='J10A2OQSTX4OYMJ2U2SSANP5BQGWAXMKOLJOKJUU4RTUFCBA';
+var clientSecret='5NTWSWTPJDGTXLG0ELGXP52CFU0UB0HL2GMJVANKDALJKHM0';
+
+
+//var bounds;
+//not a fan of 13 but its a solid choice here lol
 var mapZoom = 13;
 var infoWindow;
 //User's search input 
@@ -14,27 +22,32 @@ var locations =[
 	{
 		title: 'Thristy Scholar',
 		category: 'Coffee',
-		gCordinates: {lat: 39.788438, lng: -86.155518}
+		gCordinates: {lat: 39.788438, lng: -86.155518},
+		vCordinates: '39.788438,-86.155518'
 	},
 	{
 		title: 'Yatz',
 		category: 'Restaurant',
-		gCordinates: {lat: 39.779446, lng: -86.142430}
+		gCordinates: {lat: 39.779446, lng: -86.142430},
+		vCordinates: '39.779446,-86.142430'
 	},
 	{
 		title: 'Invoke Studio',
 		category: 'Yoga',
-		gCordinates: {lat: 39.781054, lng: -86.149882}
+		gCordinates: {lat: 39.781054, lng: -86.149882},
+		vCordinates: '39.781054,-86.149882'
 	},
 	{
 		title: 'Nada',
 		category: 'Restaurant',
-		gCordinates: {lat: 39.765753, lng: -86.158530}
+		gCordinates: {lat: 39.765753, lng: -86.158530},
+		vCordinates: '39.765753, -86.158530'
 	},
 	{
 		title: 'Dorman Street',
 		category: 'Bar',
-		gCordinates: {lat: 39.779312, lng: -86.138810}
+		gCordinates: {lat: 39.779312, lng: -86.138810},
+		vCordinates: '39.779312, -86.138810'
 	}
 
 ];
@@ -46,20 +59,40 @@ var Location = function(data, map){
   this.title = ko.observable(data.title);
   this.category = ko.observable(data.category);
   this.gCordinates = ko.observable(data.gCordinates);
+	this.vCordinates = ko.observable(data.vCordinates); 
+  this.content = '<h3>' + self.title() + '</h3>';
 	
 	this.marker = new google.maps.Marker({
 		position: self.gCordinates(),
-		//I looked up and read the document on Google Marker Animations
+		// looked up  Google Marker Animations
 		animation: google.maps.Animation.DROP,
 		title: self.title()
 	});
 
 
+	this.fourSqURL = fourSqHelper+self.vCordinates()+'&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20170816';
+
+	//
+	//this.bounds = new google.maps.LatLngBounds();
+
 	google.maps.event.addListener(self.marker, 'click', function(){
 		self.toggleBounce();
+		self.infoMagic();
 	});
 
+	$.ajax({
+		url: self.fourSqURL,
+		dataType: 'json'
+	}).done(function(data){
+		self.content = '<a target="_blank" href="https://foursquare.com/v/' + data.response.venues[0].id + '">'+
+		data.response.venues[0].name + '</a>' + '<div>'+ data.response.venues[0].location.formattedAddress;
+	}).fail(function(){
+		alert("FourSquare api has failed");
+	});
+
+//
 	this.infoMagic = function(){
+		infoWindow.setContent(self.content);
 		infoWindow.open(map, self.marker);
 	};
 
@@ -84,7 +117,6 @@ var Location = function(data, map){
 	// removing or adding the marker
 	
 	this.markerOnMap = ko.computed(function(){
-		//need to have the search input determine to the value
 		//The indexOf() method returns the first index at which
 		// a given element can be found in the array, or -1 if it is not present.
   	if (searchInput().length > 0){
@@ -104,7 +136,6 @@ var Location = function(data, map){
 		}
 
 	});
-
 
 };
 
@@ -135,6 +166,7 @@ var ViewModel = function(){
 
 	this.listClicker = function(ldata, click){
 		ldata.toggleBounce();
+		ldata.infoMagic();
 	}
 
 }
@@ -156,5 +188,6 @@ function initMap() {
 
 //
 function indyMap(){
-ko.applyBindings(new ViewModel());
+	infoWindow = new google.maps.InfoWindow();
+	ko.applyBindings(new ViewModel());
 }
