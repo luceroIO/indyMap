@@ -1,6 +1,6 @@
 "use strict";
 //Map
-var mapTitle = "Indianapolis, IN";
+var mapTitle = "Indianapolis";
 var mapCordinates = {
   lat: 39.764854,
   lng: -86.168751
@@ -85,6 +85,12 @@ var Location = function(data, map) {
     self.toggleBounce();
     self.infoMagic();
   });
+
+  google.maps.event.addDomListener(window, "resize", function() {
+    var center = map.getCenter();
+    google.maps.event.trigger(map, "resize");
+    map.setCenter(center);
+});
 
 
   $.ajax({

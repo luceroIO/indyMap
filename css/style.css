@@ -32,7 +32,7 @@ ul {
   border-style: none;
   height: 70px;
   width: 100%;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 .infoBox {
@@ -49,5 +49,8 @@ ul {
     height: 100%;
     width: 100%;
     margin-right: 300px;
+  }
+  .search {
+    font-size: 25px;
   }
 }
