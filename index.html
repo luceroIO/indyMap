@@ -13,7 +13,7 @@
       		<h1 data-bind="text: mapTitle"></h1>
       	</div>
       	<div class = "navItem">
-					<input type="text" data-bind="textInput: searchInput"
+					<input class="search" type="text" data-bind="textInput: searchInput"
 					placeholder="Type to filter ....">
       	</div>
       	<div class = "navItem">
@@ -29,7 +29,7 @@
       	</div>
   
       </section>
-      <section class ="box" id ="map">
+      <section class ="box mapView" id= "map" >
 
       </section>
 
@@ -38,12 +38,13 @@
   	my VeiwModel,  i created a function called indyMap which applys my bindings  and
   	in a sense is a trigger for the whole thing , so im using this url to call  function indyMap
   	-->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACbqxjNBRE54xH4kDaOwrsHf-wfPUrxk4&v=3&callback=indyMap">
-    </script>
+
   	<script src="js/lib/knockout.js"></script>
   	<script src="js/lib/jquery.js"></script>
-    <script defer="defer" src="js/app.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACbqxjNBRE54xH4kDaOwrsHf-wfPUrxk4&v=3&callback=indyMap" onerror="gError()">
+    </script>
+    <script src="js/app.js"></script>
 
   </body>
 </html>

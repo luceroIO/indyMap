@@ -1,54 +1,48 @@
-/*
-
-*{
-  border: 1px solid red !important;
-  margin: 0px;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
-*/
-
-.container{
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
+.container {
+  height: 100%;
 }
 
-.box{
-	width: 100%;
+.mapView {
+  height: 100%;
+  width: 100%;
 }
 
-#nav{
-	background-color: #84d6fc;
-	height: 200px;
-	order:2;
-
+#nav {
+  background-color: #84d6fc;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 40%;
+  overflow: auto;
 }
 
-#map{
-	background-color: green;
-	height: 450px;
+ul {
+  font-size: 18px;
+  line-height: 50px;
+  padding: 3px;
 }
 
+.search {
+  border-style: none;
+  height: 70px;
+  width: 100%;
+  font-size: 25px;
+}
 
-@media screen and (min-width:750px){
-	.container{
-		width: 80%;
-		display: flex;
-		margin-top: 50px;
-		margin-left: auto;
-		margin-right: auto;
+.infoBox {
+  max-width: 70px;
+  font-size: 10px;
+}
 
-	}
-	#nav{
-		width: 30%;
-		height: 700px;
-		order: 1;
-	
-	}
-	#map{
-		width: 70%;
-		height: 700px;
-		order:2 ;
-	}
-
+@media screen and (min-width:550px) {
+  .infoBox {
+    max-width: 200px;
+    font-size: 14px;
+  }
 }
