@@ -1,4 +1,8 @@
-"use strict";
+/* global google*/
+/* global ko*/
+/* global $*/
+
+
 //Map
 var mapTitle = "Indianapolis";
 var mapCordinates = {
@@ -193,11 +197,11 @@ function initMap() {
     center: mapCordinates,
     zoom: mapZoom
   });
-};
+}
 
 //
 function gError() {
-  alert("Google is not perfect, request error.....")
+  alert("Google is not perfect, request error.....");
 }
 
 //
