@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>indyMap</title>
   </head>
 
   <body>
-  	<main class="container">
-      <section class = "box" id="nav">
-      	<div class = "navItem">
-      		<h1 data-bind="text: mapTitle"></h1>
-      	</div>
-      	<div class = "navItem">
-					<input class="search" type="text" data-bind="textInput: searchInput"
-					placeholder="Type to filter ....">
-      	</div>
-      	<div class = "navItem">
-					<ul data-bind="foreach: searchLocations">
-						<!--@http://knockoutjs.com/documentation/click-binding.html
-						It tells you "If you’re inside a nested binding context, for example if you’re
-						 inside a foreach or a with block, but your handler function is on
-						 the root viewmodel or some other parent context, you’ll need to use
-						 a prefix such as $parent or $root to locate the handler function"
-						 -->
-						<li data-bind="text: title, click: $parent.listClicker"></li>
-					</ul>
-      	</div>
-  
-      </section>
-      <section class ="box mapView" id= "map" >
+    <main class="container">
+      <section class="box" id="nav">
+        <div class="navItem">
+          <h1 data-bind="text: mapTitle"></h1>
+        </div>
+        <div class="navItem">
+          <input class="search" type="text" data-bind="textInput: searchInput" placeholder="Type to filter ....">
+        </div>
+        <div class="navItem">
+          <ul data-bind="foreach: searchLocations">
+            <!--@http://knockoutjs.com/documentation/click-binding.html
+            It tells you "If you’re inside a nested binding context, for example if you’re
+             inside a foreach or a with block, but your handler function is on
+             the root viewmodel or some other parent context, you’ll need to use
+             a prefix such as $parent or $root to locate the handler function"
+             -->
+            <li data-bind="text: title, click: $parent.listClicker"></li>
+          </ul>
+        </div>
 
       </section>
+      <section class="box mapView" id="map">
 
-  	</main>
-  	<!-- by defaullt this goople api link calls initMap, because i call this function in
-  	my VeiwModel,  i created a function called indyMap which applys my bindings  and
-  	in a sense is a trigger for the whole thing , so im using this url to call  function indyMap
-  	-->
+      </section>
 
-  	<script src="js/lib/knockout.js"></script>
-  	<script src="js/lib/jquery.js"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACbqxjNBRE54xH4kDaOwrsHf-wfPUrxk4&v=3&callback=indyMap" onerror="gError()">
+    </main>
+    <!-- by defaullt this goople api link calls initMap, because i call this function in
+    my VeiwModel,  i created a function called indyMap which applys my bindings  and
+    in a sense is a trigger for the whole thing , so im using this url to call  function indyMap
+    -->
+
+    <script src="js/lib/knockout.js"></script>
+    <script src="js/lib/jquery.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACbqxjNBRE54xH4kDaOwrsHf-wfPUrxk4&v=3&callback=indyMap" onerror="gError()">
+
+
     </script>
     <script src="js/app.js"></script>
 
   </body>
-</html>
 
+</html>

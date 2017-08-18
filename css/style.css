@@ -45,4 +45,9 @@ ul {
     max-width: 200px;
     font-size: 14px;
   }
+  .mapView {
+    height: 100%;
+    width: 100%;
+    margin-right: 300px;
+  }
 }
