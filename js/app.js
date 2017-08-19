@@ -101,8 +101,11 @@ var Location = function(data, map) {
     url: self.fourSqURL,
     dataType: "json"
   }).done(function(data) {
-    self.content = "<div class=\"infoBox\"> <a target=\"_blank\" href=\"https://foursquare.com/v/" + data.response.venues[0].id + "\">" +
-      data.response.venues[0].name + "</a>" + "<div>" + data.response.venues[0].location.formattedAddress + "</div></div>";
+  	var venueName = data.response.venues[0].name ? data.response.venues[0].name: "Name data not defined :( ";
+  	var venueId = data.response.venues[0].id ? data.response.venues[0].id : "FourSquare page not defined :( ";
+  	var venueCheckins= data.response.venues[0].stats.checkinsCount ? data.response.venues[0].stats.checkinsCount: "Checkin data not defined : (";
+    self.content = "<div class=\"infoBox\"> <a target=\"_blank\" href=\"https://foursquare.com/v/" + venueId+ "\">" +
+      venueName + "</a>" + "<div> Number Checkins: " + venueCheckins + "</div></div>";
   }).fail(function() {
     alert("FourSquare api has failed");
   });
